@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Push notifications
-gem "rpush"
+gem 'houston'
 
 # Consuming RabbitMQ
 gem 'sneakers'
