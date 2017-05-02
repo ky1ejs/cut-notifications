@@ -1,3 +1,6 @@
+# rpush_spec = Gem::Specification.find_by_name 'rpush'
+# Dir["#{rpush_spec.gem_dir}/lib/tasks/*.rake"].each { |r| load r }
+
 namespace :rabbitmq do
   desc "Setup routing"
   task :setup do
