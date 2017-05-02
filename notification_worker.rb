@@ -25,18 +25,9 @@ class NotificationWorker
   end
 
   def work(raw_event)
-    json = JSON.parse raw_event
-    puts json
-    conn = json['is_dev_token'] ? self.class.ios_dev_connecton : self.class.ios_prod_connecton
+    payload = JSON.parse raw_event
 
-    # Environment variables are automatically read, or can be overridden by any specified options. You can also
-    # conveniently use `Houston::Client.development` or `Houston::Client.production`.
-
-    # An example of the token sent back when a device registers for notifications
-    token = 'f67678a5a9567413b17059d67c4a9b67c53fa81ce681cc02975690cc53a696fa'
-
-    # Create a notification that alerts a message to the user, plays a sound, and sets the badge on the app
-    notification = Houston::Notification.new(device: token)
+    notification = Houston::Notification.new(device: payload['token'])
     notification.alert = json['message']
 
     # Notifications can also change the badge count, have a custom sound, have a category identifier, indicate available Newsstand content, or pass along arbitrary data.
@@ -47,6 +38,7 @@ class NotificationWorker
     # notification.mutable_content = true
     # notification.custom_data = { foo: 'bar' }
 
+    conn = json['is_dev_token'] ? self.class.ios_dev_connecton : self.class.ios_prod_connecton
     conn.write(notification.message)
 
     ack!
