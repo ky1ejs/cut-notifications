@@ -8,7 +8,7 @@ class NotificationWorker
 
   def self.ios_dev_connecton
     return @ios_dev_connecton if !@ios_dev_connecton.nil?
-    certificate = File.read('cut-apns-dev.pem')
+    certificate = File.read(ENV[:CUT_APNS_DEV_PEM])
     passphrase = ''
     @ios_dev_connecton = Houston::Connection.new(Houston::APPLE_DEVELOPMENT_GATEWAY_URI, certificate, nil)
     @ios_dev_connecton.open
@@ -17,7 +17,7 @@ class NotificationWorker
 
   def self.ios_prod_connecton
     return @ios_prod_connecton if !@ios_prod_connecton.nil?
-    certificate = File.read('cut-apns-dev.pem')
+    certificate = File.read(ENV[:CUT_APNS_PROD_PEM])
     passphrase = ''
     @ios_prod_connecton = Houston::Connection.new(Houston::APPLE_PRODUCTION_GATEWAY_URI, certificate, passphrase)
     @ios_prod_connecton.open

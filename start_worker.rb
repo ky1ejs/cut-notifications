@@ -6,7 +6,11 @@ require 'notification_worker.rb'
 require 'sneakers/runner'
 require 'logger'
 
-Sneakers.configure  :amqp => 'amqp://guest:guest@localhost:5672',
+user = ENV[:RABBITMQ_USER]
+pass = ENV[:RABBITMQ_PASS]
+host = ENV[:RABBITMQ_HOST]
+
+Sneakers.configure  :amqp => "amqp://#{user}:#{pass}@#{host}:5672",
                     :daemonize => false,
                     :log => STDOUT
 
