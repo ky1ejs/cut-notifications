@@ -28,7 +28,7 @@ class NotificationWorker
     payload = JSON.parse raw_event
 
     notification = Houston::Notification.new(device: payload['token'])
-    notification.alert = json['message']
+    notification.alert = payload['message']
 
     # Notifications can also change the badge count, have a custom sound, have a category identifier, indicate available Newsstand content, or pass along arbitrary data.
     notification.badge = 0
@@ -38,7 +38,7 @@ class NotificationWorker
     # notification.mutable_content = true
     # notification.custom_data = { foo: 'bar' }
 
-    conn = json['is_dev_token'] ? self.class.ios_dev_connecton : self.class.ios_prod_connecton
+    conn = payload['is_dev_token'] ? self.class.ios_dev_connecton : self.class.ios_prod_connecton
     conn.write(notification.message)
 
     ack!
