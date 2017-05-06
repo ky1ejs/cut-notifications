@@ -6,7 +6,17 @@ namespace :rabbitmq do
   task :setup do
     require "bunny"
 
-    conn = Bunny.new(host: 'localhost')
+    conn = Bunny.new {
+      :host      => ENV['RABBITMQ_HOST'].strip,
+      :port      => 5672,
+      :ssl       => false,
+      :vhost     => "/",
+      :user      => ENV['RABBITMQ_USER'].strip,
+      :pass      => ENV['RABBITMQ_PASS'].strip,
+      :heartbeat => :server, # will use RabbitMQ setting
+      :frame_max => 131072,
+      :auth_mechanism => "PLAIN"
+    }
     conn.start
 
     ch = conn.create_channel
