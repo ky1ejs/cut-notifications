@@ -33,11 +33,11 @@ class NotificationWorker
     is_dev_token = payload['is_dev_token']
 
     if token == nil ||
-      !token.is_a? String ||
+      !token.is_a?(String) ||
       message == nil ||
-      !message.is_a? String ||
+      !message.is_a?(String) ||
       is_dev_token == nil ||
-      !(is_dev_token.is_a? TrueClass || is_dev_token.is_a? FalseClass)
+      !(is_dev_token.is_a?(TrueClass) || is_dev_token.is_a?(FalseClass))
       ack!
       puts '################################'
       puts "JSON payload invalid"
