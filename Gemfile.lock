@@ -6,6 +6,7 @@ GEM
       amq-protocol (>= 2.1.0)
     commander (4.4.3)
       highline (~> 1.7.2)
+    connection_pool (2.2.1)
     foreman (0.84.0)
       thor (~> 0.19.1)
     highline (1.7.8)
@@ -28,6 +29,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  connection_pool
   foreman
   houston
   json
