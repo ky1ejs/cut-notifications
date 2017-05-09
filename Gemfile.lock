@@ -4,16 +4,37 @@ GEM
     amq-protocol (2.1.0)
     bunny (2.6.5)
       amq-protocol (>= 2.1.0)
-    commander (4.4.3)
-      highline (~> 1.7.2)
+    celluloid (0.17.3)
+      celluloid-essentials
+      celluloid-extras
+      celluloid-fsm
+      celluloid-pool
+      celluloid-supervision
+      timers (>= 4.1.1)
+    celluloid-essentials (0.20.5)
+      timers (>= 4.1.1)
+    celluloid-extras (0.20.5)
+      timers (>= 4.1.1)
+    celluloid-fsm (0.20.5)
+      timers (>= 4.1.1)
+    celluloid-io (0.17.3)
+      celluloid (>= 0.17.2)
+      nio4r (>= 1.1)
+      timers (>= 4.1.1)
+    celluloid-pool (0.20.5)
+      timers (>= 4.1.1)
+    celluloid-supervision (0.20.6)
+      timers (>= 4.1.1)
     connection_pool (2.2.1)
     foreman (0.84.0)
       thor (~> 0.19.1)
-    highline (1.7.8)
-    houston (2.2.4)
-      commander (~> 4.4)
-      json
+    hitimes (1.2.4)
+    http-2 (0.8.4)
     json (2.1.0)
+    lowdown (1.0.0)
+      celluloid-io (>= 0.17.3)
+      http-2 (>= 0.8)
+    nio4r (2.0.0)
     serverengine (1.5.11)
       sigdump (~> 0.2.2)
     sigdump (0.2.4)
@@ -24,6 +45,8 @@ GEM
       thread (~> 0.1.7)
     thor (0.19.4)
     thread (0.1.7)
+    timers (4.1.2)
+      hitimes
 
 PLATFORMS
   ruby
@@ -31,8 +54,8 @@ PLATFORMS
 DEPENDENCIES
   connection_pool
   foreman
-  houston
   json
+  lowdown
   sneakers
 
 BUNDLED WITH

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Push notifications
-gem 'houston'
+gem 'lowdown'
 
 # For a pool of APNS connections
 gem 'connection_pool'
