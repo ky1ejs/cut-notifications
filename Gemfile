@@ -1,10 +1,7 @@
 source 'https://rubygems.org'
 
 # Push notifications
-gem 'lowdown'
-
-# For a pool of APNS connections
-gem 'connection_pool'
+gem 'apnotic'
 
 # Consuming RabbitMQ
 gem 'sneakers'

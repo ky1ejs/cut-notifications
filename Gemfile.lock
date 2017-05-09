@@ -2,39 +2,18 @@ GEM
   remote: https://rubygems.org/
   specs:
     amq-protocol (2.1.0)
+    apnotic (1.1.0)
+      connection_pool (~> 2.0)
+      net-http2 (>= 0.15, < 2)
     bunny (2.6.5)
       amq-protocol (>= 2.1.0)
-    celluloid (0.17.3)
-      celluloid-essentials
-      celluloid-extras
-      celluloid-fsm
-      celluloid-pool
-      celluloid-supervision
-      timers (>= 4.1.1)
-    celluloid-essentials (0.20.5)
-      timers (>= 4.1.1)
-    celluloid-extras (0.20.5)
-      timers (>= 4.1.1)
-    celluloid-fsm (0.20.5)
-      timers (>= 4.1.1)
-    celluloid-io (0.17.3)
-      celluloid (>= 0.17.2)
-      nio4r (>= 1.1)
-      timers (>= 4.1.1)
-    celluloid-pool (0.20.5)
-      timers (>= 4.1.1)
-    celluloid-supervision (0.20.6)
-      timers (>= 4.1.1)
     connection_pool (2.2.1)
     foreman (0.84.0)
       thor (~> 0.19.1)
-    hitimes (1.2.4)
-    http-2 (0.8.4)
+    http-2 (0.8.2)
     json (2.1.0)
-    lowdown (1.0.0)
-      celluloid-io (>= 0.17.3)
-      http-2 (>= 0.8)
-    nio4r (2.0.0)
+    net-http2 (0.15.0)
+      http-2 (= 0.8.2)
     serverengine (1.5.11)
       sigdump (~> 0.2.2)
     sigdump (0.2.4)
@@ -45,17 +24,14 @@ GEM
       thread (~> 0.1.7)
     thor (0.19.4)
     thread (0.1.7)
-    timers (4.1.2)
-      hitimes
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  connection_pool
+  apnotic
   foreman
   json
-  lowdown
   sneakers
 
 BUNDLED WITH

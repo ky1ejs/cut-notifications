@@ -1,14 +1,14 @@
 require 'sneakers'
 require 'json'
-require 'lowdown'
+require 'apnotic'
 require 'connection_pool'
 
 class NotificationWorker
   include Sneakers::Worker
   from_queue "notification.queue", env: nil
 
-  DEV_APNS_POOL  = Lowdown::Client.production(false,  certificate: File.read(ENV['CUT_APNS_DEV_PEM']),  pool_size: 3)
-  PROD_APNS_POOL = Lowdown::Client.production(true,   certificate: File.read(ENV['CUT_APNS_PROD_PEM']), pool_size: 3)
+  DEV_POOL = Apnotic::ConnectionPool.development({cert_path: ENV['CUT_APNS_DEV_PEM']}, size: 5)
+  PROD_POOL = Apnotic::ConnectionPool.new({cert_path: ENV['CUT_APNS_PROD_PEM']}, size: 5)
 
   def work(raw_event)
     payload = JSON.parse raw_event
@@ -33,24 +33,23 @@ class NotificationWorker
       return
     end
 
-    pool = is_dev_token ? DEV_APNS_POOL : PROD_APNS_POOL
+    puts payload
 
-    begin
-      pool.group do |g|
-        notification = Lowdown::Notification.new(:token => token)
-        notification.payload = { :alert => message, :sound => "default" }
-        g.send_notification(notification) do |response|
-          if response.success?
-            puts "Sent notification with ID: #{notification.id}"
-          else
-            puts "[!] (##{response.id}): #{response}"
-          end
-        end
+    pool = is_dev_token ? DEV_POOL : PROD_POOL
+
+    pool.with do |conn|
+      notification       = Apnotic::Notification.new(token)
+      notification.alert = message
+      notification.sound = 'default'
+
+      response = conn.push(notification)
+
+      if response == nil
+        puts "Timeout sending a push notification"
+      else
+        puts "Success     #{response.ok?}"
+        puts "Status Code #{response.status}"
       end
-    rescue Interrupt
-      puts "[!] Interrupt, exiting"
-    rescue Exception => e
-      puts "[!] Error occurred: #{e.message}"
     end
   end
 end
