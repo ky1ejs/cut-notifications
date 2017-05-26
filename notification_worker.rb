@@ -49,6 +49,7 @@ class NotificationWorker
       else
         puts "Success     #{response.ok?}"
         puts "Status Code #{response.status}"
+        ack!
       end
     end
   end
