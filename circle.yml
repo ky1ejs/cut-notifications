@@ -1,0 +1,14 @@
+machine:
+  environment:
+    PROJECT_NAME: cut-api-kylejm
+    CLUSTER_NAME: cut-api
+    CLOUDSDK_COMPUTE_ZONE: europe-west1-d
+    GCLOUD_AUTH_JSON: ${HOME}/account-auth.json
+  services:
+    - docker
+
+deployment:
+  prod:
+    branch: master
+    commands:
+      - ./deploy.sh
